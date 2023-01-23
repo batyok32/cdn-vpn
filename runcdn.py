@@ -140,7 +140,7 @@ def check_many():
 def generate_clients():
     code = input("Code of clients: ")
     password = input("Password of clients: ")
-    amount = input("Clients amount: ")
+    amount = eval(input("Clients amount: "))
     list_users_txt = ""
     for x in range(1, int(amount+1)):
         list_users_txt += f"""

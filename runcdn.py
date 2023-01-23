@@ -81,7 +81,12 @@ cat $LOG | grep -i dropbear | grep -i "Password auth succeeded" > /var/login-db.
 
     with open("/root/findmultiple.py", "w") as x:
         x.write("""
-import json\\nimport subprocess\\nimport collections\\nf = open("/var/data.txt", "r")\\ndata = f.readlines()\\nconnectedlist = []\\n
+import json
+import subprocess
+import collections
+f = open("/var/data.txt", "r")
+data = f.readlines()
+connectedlist = []
 for pid in data:
     pid = pid.split("\\n")[0]
     clea = open("/var/login-db-pid.txt", "w")

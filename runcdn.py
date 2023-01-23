@@ -88,7 +88,7 @@ f = open("/var/data.txt", "r")
 data = f.readlines()
 connectedlist = []
 for pid in data:
-    pid = pid.split("\\n")[0]
+    pid = pid.split("\n")[0]
     clea = open("/var/login-db-pid.txt", "w")
     clea.write("")
     clea.close()

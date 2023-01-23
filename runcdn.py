@@ -120,7 +120,7 @@ for connecteduser in connectedlist:
         dupes.append(connecteduser)
     else:
         seen.add(connecteduser)
-print("Ахуевшие клиенты: \\n")
+print("Ахуевшие клиенты: \n")
 counter = collections.Counter(dupes)
 for count in counter:
     print(count, "-", counter[count]+1)

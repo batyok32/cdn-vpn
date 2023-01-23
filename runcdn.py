@@ -25,10 +25,10 @@ def install():
 
     with open(f"/root/cleanup.sh", "w") as f:
         f.write("""
-    #!/bin/bash
+#!/bin/bash
 
-    rm -rf /var/log/syslog*
-    rm -rf /var/log/journal/*    
+rm -rf /var/log/syslog*
+rm -rf /var/log/journal/*    
         """)
 
     subprocess.run(
@@ -88,7 +88,7 @@ f = open("/var/data.txt", "r")
 data = f.readlines()
 connectedlist = []
 for pid in data:
-    pid = pid.split("\n")[0]
+    pid = pid.split("\\n")[0]
     clea = open("/var/login-db-pid.txt", "w")
     clea.write("")
     clea.close()
@@ -120,7 +120,7 @@ for connecteduser in connectedlist:
         dupes.append(connecteduser)
     else:
         seen.add(connecteduser)
-print("Ахуевшие клиенты: \n")
+print("Ахуевшие клиенты: \\n")
 counter = collections.Counter(dupes)
 for count in counter:
     print(count, "-", counter[count]+1)
@@ -163,13 +163,20 @@ subprocess.run(
         ["python3 /root/hey.py"],
         shell=True,
     )
-    
+
+def clear_cache():
+    subprocess.run(
+        ["rm -rf /var/log/syslog* && rm -rf /var/log/journal/*"],
+        shell=True,
+    )
+
 
 
 print(f"""{bcolors.WARNING}\n\n
 1) Install
 2) Check too many connections
 3) Generate clients
+4) Clear space
 {bcolors.ENDC}
 """)
 
@@ -178,10 +185,18 @@ while True:
     if res == "1":
         install()
         break
+    
     elif res == "2":
         check_many()
         break
+
     elif res == "3":
         generate_clients()
+        break
+
+    elif res == "4":
+        clear_cache()
+        break
+
     else:
         print(f"{bcolors.FAIL}\nNormalny yazaiow\n{bcolors.ENDC}")

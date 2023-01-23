@@ -81,9 +81,9 @@ cat $LOG | grep -i dropbear | grep -i "Password auth succeeded" > /var/login-db.
 
     with open("/root/findmultiple.py", "w") as x:
         x.write("""
-import json\nimport subprocess\nimport collections\nf = open("/var/data.txt", "r")\ndata = f.readlines()\nconnectedlist = []\n
+import json\\nimport subprocess\\nimport collections\\nf = open("/var/data.txt", "r")\\ndata = f.readlines()\\nconnectedlist = []\\n
 for pid in data:
-    pid = pid.split("\n")[0]
+    pid = pid.split("\\n")[0]
     clea = open("/var/login-db-pid.txt", "w")
     clea.write("")
     clea.close()
@@ -115,7 +115,7 @@ for connecteduser in connectedlist:
         dupes.append(connecteduser)
     else:
         seen.add(connecteduser)
-print("Ахуевшие клиенты: \n")
+print("Ахуевшие клиенты: \\n")
 counter = collections.Counter(dupes)
 for count in counter:
     print(count, "-", counter[count]+1)
@@ -138,7 +138,6 @@ def check_many():
 
 
 def generate_clients():
-    ip = input("Vps ip: ")
     code = input("Code of clients: ")
     password = input("Password of clients: ")
     amount = input("Clients amount: ")

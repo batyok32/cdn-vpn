@@ -36,6 +36,10 @@ rm -rf /var/log/journal/*
         shell=True,
     )
     subprocess.run(
+        ["apt install python3-pip -y"],
+        shell=True,
+    )
+    subprocess.run(
         ["pip3 install python-crontab"],
         shell=True,
     )

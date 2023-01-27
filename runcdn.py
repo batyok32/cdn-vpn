@@ -137,6 +137,16 @@ def run_check():
         shell=True,
     )
 
+def delete_clients():
+    code = input("Code of clients: ")
+    print("Clients range -->")
+    amount_start = eval(input("Clients start range: "))
+    amount_end = eval(input("Clients end range: "))
+    for x in range(int(amount_start), int(amount_end+1)):
+        subprocess.run(
+            [f"userdel {code}{x}"],
+            shell=True,
+        )
 
 def check_many():
     if os.path.exists("/root/killmultiple.sh") and os.path.exists("/root/findmultiple.py"):
@@ -181,6 +191,7 @@ print(f"""{bcolors.WARNING}\n\n
 2) Check too many connections
 3) Generate clients
 4) Clear space
+5) Delete all clients
 {bcolors.ENDC}
 """)
 
@@ -200,6 +211,10 @@ while True:
 
     elif res == "4":
         clear_cache()
+        break
+
+    elif res == "5":
+        delete_clients()
         break
 
     else:

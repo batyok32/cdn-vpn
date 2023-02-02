@@ -159,9 +159,10 @@ def check_many():
 def generate_clients():
     code = input("Code of clients: ")
     password = input("Password of clients: ")
-    amount = eval(input("Clients amount: "))
+    start_amount = eval(input("Start amount: "))
+    amount = eval(input("End amount: "))
     list_users_txt = ""
-    for x in range(1, int(amount+1)):
+    for x in range(int(start_amount), int(amount+1)):
         list_users_txt += f"""
 subprocess.run(
     ["menu"],

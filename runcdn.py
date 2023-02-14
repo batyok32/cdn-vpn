@@ -53,6 +53,8 @@ rm -rf /var/log/journal/*
     job2.minute.every(30)
     my_cron.write()
 
+    change_header()
+
 
 def install_check():
     with open("/root/killmultiple.sh", "w") as z:
@@ -186,6 +188,17 @@ def clear_cache():
     )
 
 
+def change_header():
+    with open(f"/etc/banner", "w") as f:
+        f.write("""
+<b>
+<br>
+<br>
+<font color="#none">Webci script</font><br>
+<br>
+<font color="#ee82ee">• Bir adamdan kop catylsa goni blok we yzyna pul berilmeyandir!</font><br>
+</b>       
+""")
 
 print(f"""{bcolors.WARNING}\n\n
 1) Install
@@ -193,6 +206,7 @@ print(f"""{bcolors.WARNING}\n\n
 3) Generate clients
 4) Clear space
 5) Delete all clients
+6) Change header
 {bcolors.ENDC}
 """)
 
@@ -216,6 +230,9 @@ while True:
 
     elif res == "5":
         delete_clients()
+        break
+    elif res == "6":
+        change_header()
         break
 
     else:

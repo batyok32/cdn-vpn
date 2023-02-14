@@ -163,12 +163,13 @@ def generate_clients():
     password = input("Password of clients: ")
     start_amount = eval(input("Start amount: "))
     amount = eval(input("End amount: "))
+    time_to_live = eval(input("Time to live: "))
     list_users_txt = ""
     for x in range(int(start_amount), int(amount+1)):
         list_users_txt += f"""
 subprocess.run(
     ["menu"],
-    input="1\\n1\\n{code}{x}\\n{password}\\n30\\n".encode(),
+    input="1\\n1\\n{code}{x}\\n{password}\\n{time_to_live}\\n".encode(),
     shell=True,
 )
     """

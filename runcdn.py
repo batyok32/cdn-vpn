@@ -187,6 +187,11 @@ def clear_cache():
         ["rm -rf /var/log/syslog* && rm -rf /var/log/journal/*"],
         shell=True,
     )
+    subprocess.run(
+        ["systemctl restart syslog.service"],
+        shell=True,
+    )
+
 
 
 def change_header():

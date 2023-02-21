@@ -189,10 +189,8 @@ subprocess.run(
 )
     """
         result_users_text += f"""
-{bcolors.OKGREEN}
-username: {code}{x}
-password: {password}
-{bcolors.ENDC}\n
+{bcolors.OKGREEN}username: {code}{x}
+password: {password}{bcolors.ENDC}
 """
     with open("/root/hey.py", "w") as f:
         f.write("import subprocess\n")

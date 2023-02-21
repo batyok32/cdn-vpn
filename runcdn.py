@@ -1,5 +1,7 @@
 import os
 import subprocess
+import secrets
+import string
 
 class bcolors:
     HEADER = '\033[95m'
@@ -160,12 +162,25 @@ def check_many():
 
 def generate_clients():
     code = input("Code of clients: ")
-    password = input("Password of clients: ")
+    random=False
+    print("""
+Password type of clients: 
+[1] Random
+[2] Custom""")
+    password_type = input("[1]: ")
+    if password_type == "2":
+        password = input("Password of clients: ")
+    else:
+        random=True
     start_amount = eval(input("Start amount: "))
     amount = eval(input("End amount: "))
     time_to_live = eval(input("Time to live: "))
     list_users_txt = ""
+    result_users_text = ""
     for x in range(int(start_amount), int(amount+1)):
+        if random:
+            alphabet = string.ascii_letters + string.digits
+            password = ''.join(secrets.choice(alphabet) for i in range(16)) 
         list_users_txt += f"""
 subprocess.run(
     ["menu"],
@@ -173,7 +188,13 @@ subprocess.run(
     shell=True,
 )
     """
-    with open(f"/root/hey.py", "w") as f:
+        result_users_text += f"""
+{bcolors.OKGREEN}
+username: {code}{x}
+password: {password}
+{bcolors.ENDC}\n
+"""
+    with open("/root/hey.py", "w") as f:
         f.write("import subprocess\n")
         f.write(list_users_txt)
 
@@ -181,6 +202,10 @@ subprocess.run(
         ["python3 /root/hey.py"],
         shell=True,
     )
+    if random:
+        with open("/root/keys.txt", "w") as f:
+            f.write(result_users_text)
+        print(result_users_text)
 
 def clear_cache():
     subprocess.run(

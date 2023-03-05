@@ -229,13 +229,42 @@ def change_header():
 </b>       
 """)
 
+def change_users_list_password():
+    user_list = []
+    result_array = ""
+    print("Ulanyjy adyny yaz, gutaran bolsanam 'ex' diy.")
+    while True:
+        username = input("Username: ")
+        if username == "ex":
+            break
+        else:
+            user_list.append(username)
+
+    for user in user_list:
+        alphabet = string.ascii_letters + string.digits
+        password = ''.join(secrets.choice(alphabet) for i in range(16)) 
+        subprocess.run(
+            [f"passwd {user}"],
+            input=f"{password}\n{password}\n".encode(),
+            shell=True,
+        )
+        result_array += f"username: {user}\npassword: {password}\n\n"
+
+    print(result_array)
+
+
+
 print(f"""{bcolors.WARNING}\n\n
+
 1) Install
-2) Check too many connections
-3) Generate clients
-4) Clear space
-5) Delete all clients
-6) Change header
+2) Change header
+3) Clear space
+
+--------------
+4) Check too many connections
+5) Generate clients
+6) Delete all clients
+7) Change random passwords 
 {bcolors.ENDC}
 """)
 
@@ -245,23 +274,28 @@ while True:
         install()
         break
     
-    elif res == "2":
+    elif res == "4":
         check_many()
         break
 
-    elif res == "3":
+    elif res == "5":
         generate_clients()
         break
 
-    elif res == "4":
+    elif res == "3":
         clear_cache()
         break
 
-    elif res == "5":
+    elif res == "6":
         delete_clients()
         break
-    elif res == "6":
+
+    elif res == "2":
         change_header()
+        break
+
+    elif res == "7":
+        change_users_list_password()
         break
 
     else:

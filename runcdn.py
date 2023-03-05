@@ -249,8 +249,11 @@ def change_users_list_password():
             shell=True,
         )
         result_array += f"username: {user}\npassword: {password}\n\n"
- 
- 
+        
+    with open("/root/keys.txt", "w") as f:
+        f.write(result_array)
+        print(result_array)
+
     print(result_array)
 
 

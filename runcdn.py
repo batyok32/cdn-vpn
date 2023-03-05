@@ -249,7 +249,8 @@ def change_users_list_password():
             shell=True,
         )
         result_array += f"username: {user}\npassword: {password}\n\n"
-
+ 
+ 
     print(result_array)
 
 

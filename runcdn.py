@@ -249,12 +249,72 @@ def change_users_list_password():
             shell=True,
         )
         result_array += f"username: {user}\npassword: {password}\n\n"
-        
+
     with open("/root/keys.txt", "w") as f:
         f.write(result_array)
-        print(result_array)
 
     print(result_array)
+
+
+def lock_multiple():
+    user_list = []
+    print("Ulanyjy adyny yaz, gutaran bolsanam 'ex' diy.")
+    while True:
+        username = input("Username: ")
+        if username == "ex":
+            break
+        else:
+            user_list.append(username)
+    lock_users_list =""
+    for user in user_list:
+
+        lock_users_list += f"""
+subprocess.run(
+    ["menu"],
+    input="1\\n8\\n{user}\\n".encode(),
+    shell=True,
+)
+    """
+    with open("/root/lockss.py", "w") as f:
+        f.write("import subprocess\n")
+        f.write(lock_users_list)
+        
+    subprocess.run(
+        ["python3 /root/lockss.py"],
+        shell=True,
+    )
+
+    print(lock_users_list)
+
+def unlock_multiple():
+    user_list = []
+    print("Ulanyjy adyny yaz, gutaran bolsanam 'ex' diy.")
+    while True:
+        username = input("Username: ")
+        if username == "ex":
+            break
+        else:
+            user_list.append(username)
+    lock_users_list =""
+    for user in user_list:
+
+        lock_users_list += f"""
+subprocess.run(
+    ["menu"],
+    input="1\\n9\\n{user}\\n".encode(),
+    shell=True,
+)
+    """
+    with open("/root/lockss.py", "w") as f:
+        f.write("import subprocess\n")
+        f.write(lock_users_list)
+        
+    subprocess.run(
+        ["python3 /root/lockss.py"],
+        shell=True,
+    )
+
+    print(lock_users_list)
 
 
 
@@ -269,6 +329,9 @@ print(f"""{bcolors.WARNING}\n\n
 5) Generate clients
 6) Delete all clients
 7) Change random passwords 
+8) Lock multiple
+9) Unlock multiple
+
 {bcolors.ENDC}
 """)
 
@@ -300,6 +363,14 @@ while True:
 
     elif res == "7":
         change_users_list_password()
+        break
+
+    elif res == "8":
+        lock_multiple()
+        break
+
+    elif res == "9":
+        unlock_multiple()
         break
 
     else:
